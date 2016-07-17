@@ -51,7 +51,8 @@ INF  MdeModulePkg/Universal/WatchdogTimerDxe/WatchdogTimer.inf
 INF  MdeModulePkg/Core/RuntimeDxe/RuntimeDxe.inf
 INF  MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDxe.inf
 
-INF  DuetPkg/FSVariable/FSVariable.inf
+#INF  DuetPkg/FSVariable/FSVariable.inf
+INF  MdeModulePkg/Universal/Variable/EmuRuntimeDxe/EmuVariableRuntimeDxe.inf
 INF  MdeModulePkg/Universal/CapsuleRuntimeDxe/CapsuleRuntimeDxe.inf
 INF  MdeModulePkg/Universal/MemoryTest/NullMemoryTestDxe/NullMemoryTestDxe.inf
 INF  MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
@@ -62,12 +63,12 @@ INF  MdeModulePkg/Universal/SetupBrowserDxe/SetupBrowserDxe.inf
 INF  MdeModulePkg/Universal/DisplayEngineDxe/DisplayEngineDxe.inf
 
 INF  MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
-INF  MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
+#INF  MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
 INF  MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 INF  DuetPkg/SmbiosGenDxe/SmbiosGen.inf
 #INF  DuetPkg/FvbRuntimeService/DUETFwh.inf
 INF  IntelFrameworkModulePkg/Universal/BdsDxe/BdsDxe.inf
-INF  MdeModulePkg/Universal/EbcDxe/EbcDxe.inf
+#INF  MdeModulePkg/Universal/EbcDxe/EbcDxe.inf
 INF  MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
 INF  UefiCpuPkg/CpuIo2Dxe/CpuIo2Dxe.inf
 INF  UefiCpuPkg/CpuDxe/CpuDxe.inf
@@ -79,36 +80,63 @@ INF  PcAtChipsetPkg/8254TimerDxe/8254Timer.inf
 INF  PcAtChipsetPkg/PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf
 INF  DuetPkg/PciRootBridgeNoEnumerationDxe/PciRootBridgeNoEnumeration.inf
 INF  DuetPkg/PciBusNoEnumerationDxe/PciBusNoEnumeration.inf
-INF  IntelFrameworkModulePkg/Bus/Pci/VgaMiniPortDxe/VgaMiniPortDxe.inf
-INF  IntelFrameworkModulePkg/Universal/Console/VgaClassDxe/VgaClassDxe.inf
+
+# VGA Text Mode
+
+#INF  IntelFrameworkModulePkg/Bus/Pci/VgaMiniPortDxe/VgaMiniPortDxe.inf
+#INF  IntelFrameworkModulePkg/Universal/Console/VgaClassDxe/VgaClassDxe.inf
+
+  # DataHubDxe
+INF  IntelFrameworkModulePkg/Universal/DataHubDxe/DataHubDxe.inf
 
   # IDE/AHCI Support
 INF  DuetPkg/SataControllerDxe/SataControllerDxe.inf
 INF  MdeModulePkg/Bus/Ata/AtaAtapiPassThru/AtaAtapiPassThru.inf
 INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
-INF  MdeModulePkg/Bus/Scsi/ScsiBusDxe/ScsiBusDxe.inf
-INF  MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
+#INF  MdeModulePkg/Bus/Scsi/ScsiBusDxe/ScsiBusDxe.inf
+#INF  MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
 
   # Usb Support
-INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
+#INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
 INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
+INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
+INF  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbMassStorageDxe/UsbMassStorageDxe.inf
 
   # ISA Support
 INF  PcAtChipsetPkg/IsaAcpiDxe/IsaAcpi.inf
 INF  IntelFrameworkModulePkg/Bus/Isa/IsaBusDxe/IsaBusDxe.inf
-INF  IntelFrameworkModulePkg/Bus/Isa/IsaSerialDxe/IsaSerialDxe.inf
+#INF  IntelFrameworkModulePkg/Bus/Isa/IsaSerialDxe/IsaSerialDxe.inf
 INF  IntelFrameworkModulePkg/Bus/Isa/Ps2KeyboardDxe/Ps2keyboardDxe.inf
-INF  IntelFrameworkModulePkg/Bus/Isa/IsaFloppyDxe/IsaFloppyDxe.inf
+#INF  IntelFrameworkModulePkg/Bus/Isa/IsaFloppyDxe/IsaFloppyDxe.inf
 
 INF  MdeModulePkg/Universal/Disk/DiskIoDxe/DiskIoDxe.inf
 INF  MdeModulePkg/Universal/Disk/UnicodeCollation/EnglishDxe/EnglishDxe.inf
 INF  MdeModulePkg/Universal/Disk/PartitionDxe/PartitionDxe.inf
-INF  DuetPkg/BiosVideoThunkDxe/BiosVideo.inf
+#INF  DuetPkg/BiosVideoThunkDxe/BiosVideo.inf
 
-INF  FatPkg/EnhancedFatDxe/Fat.inf
+INF DuetPkg/PlatformGopPolicy/PlatformGopPolicy.inf
+
+FILE DRIVER = FF0C8745-3270-4439-B74F-3E45F8C77064 {
+  SECTION DXE_DEPEX_EXP = {gPlatformGOPPolicyGuid}
+  SECTION PE32 = DuetPkg/IntelBrdwlGopDriver.efi
+  SECTION UI = "IntelGopDriver"
+}
+
+FILE FREEFORM = 878AC2CC-5343-46F2-B563-51F89DAF56BA {
+  SECTION RAW = DuetPkg/Vbt-C720.bin
+  #SECTION RAW = DuetPkg/Vbt-C740.bin
+  #SECTION RAW = DuetPkg/Vbt-hswbdw-cbox.bin
+  SECTION UI = "IntelGopVbt"
+}
+
+  # Binary INF file to support toggle among different CPU architectures.
+INF  RuleOverride=BINARY FatBinPkg/EnhancedFatDxe/Fat.inf
+INF  RuleOverride=BINARY FSDrivers/ntfs.inf
+INF  RuleOverride=BINARY FSDrivers/ext4.inf
+INF  RuleOverride=BINARY FSDrivers/ufs2.inf
 
 FILE FREEFORM = PCD(gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdLogoFile) {
     SECTION RAW = MdeModulePkg/Logo/Logo.bmp
