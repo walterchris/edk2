@@ -55,14 +55,14 @@ EfiLoader (
   UINTN                 BfvBase;
   EFI_MAIN_ENTRYPOINT   EfiMainEntrypoint;
   EFILDRHANDOFF         Handoff;
-  UINTN                 Index;
+  //UINTN                 Index;
 
-  ClearScreen();
+  /*ClearScreen();
   
   PrintHeader ('A');
   
   PrintString ("Enter DUET Loader...\n");
-  PrintString ("BiosMemoryMapBaseAddress = %x\n", (UINTN) BiosMemoryMapBaseAddress);
+  PrintString ("BiosMemoryMapBaseAddress = %x\n", (UINTN) BiosMemoryMapBaseAddress);*/
 
   //
   // Add all EfiConventionalMemory descriptors to the table.  If there are partial pages, then
@@ -72,7 +72,7 @@ EfiLoader (
   NumberOfMemoryMapEntries = 0;
   GenMemoryMap (&NumberOfMemoryMapEntries, EfiMemoryDescriptor, BiosMemoryMap);
 
-  PrintString ("Get %d entries of memory map!\n", NumberOfMemoryMapEntries);
+  //PrintString ("Get %d entries of memory map!\n", NumberOfMemoryMapEntries);
 
   //
   // Get information on where the image is in memory
@@ -88,11 +88,11 @@ EfiLoader (
   //
   // Decompress the image
   //
-  PrintString (
+  /*PrintString (
     "Decompress BFV image, Image Address = %x Offset = %x\n", 
     (UINTN) (EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
     (UINTN) EFILDRImage->Offset
-    );
+    );*/
   Status = LzmaUefiDecompressGetInfo (
              (VOID *)(UINTN)(EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
              EFILDRImage->Length,
@@ -104,7 +104,7 @@ EfiLoader (
     SystemHang ("Failed to get decompress information for BFV!\n");
   }
   
-  PrintString ("BFV decompress: DestinationSize = %x, ScratchSize = %x\n", (UINTN) DestinationSize, (UINTN) ScratchSize);
+  //PrintString ("BFV decompress: DestinationSize = %x, ScratchSize = %x\n", (UINTN) DestinationSize, (UINTN) ScratchSize);
   Status =  LzmaUefiDecompress (
     (VOID *)(UINTN)(EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
     EFILDRImage->Length,
@@ -125,7 +125,7 @@ EfiLoader (
   ZeroMem ((VOID *)(UINTN)BfvBase, BfvPageNumber * EFI_PAGE_SIZE);
   CopyMem ((VOID *)(UINTN)BfvBase, (VOID *)(UINTN)EFI_DECOMPRESSED_BUFFER_ADDRESS, DestinationSize);
 
-  PrintHeader ('B');
+  //PrintHeader ('B');
 
   //
   // Point to the 2nd image (DxeIpl)
@@ -136,11 +136,11 @@ EfiLoader (
   //
   // Decompress the image
   //
-  PrintString (
+  /*PrintString (
     "Decompress DxeIpl image, Image Address = %x Offset = %x\n", 
     (UINTN) (EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
     (UINTN) EFILDRImage->Offset
-    );
+    );*/
 
   Status = LzmaUefiDecompressGetInfo (
              (VOID *)(UINTN)(EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
@@ -162,7 +162,7 @@ EfiLoader (
     SystemHang ("Failed to decompress DxeIpl image\n");
   }
 
-  PrintString ("Start load DxeIpl PE image\n");  
+  //PrintString ("Start load DxeIpl PE image\n");  
 
   //
   // Load and relocate the EFI PE/COFF Firmware Image 
@@ -176,13 +176,13 @@ EfiLoader (
   if (EFI_ERROR (Status)) {
     SystemHang ("Failed to load and relocate DxeIpl PE image!\n");
   }
-  PrintString (
+  /*PrintString (
     "DxeIpl PE image is successed loaded at %lx, entry=%p\n",
     DxeIplImage.ImageBasePage,
     DxeIplImage.EntryPoint
     );
 
-PrintHeader ('C');
+PrintHeader ('C');*/
 
   //
   // Point to the 3rd image (DxeMain)
@@ -192,11 +192,11 @@ PrintHeader ('C');
   //
   // Decompress the image
   //
-  PrintString (
+  /*PrintString (
     "Decompress DxeMain FV image, Image Address = %x Offset = %x\n",
     (UINTN)(EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
     (UINTN) EFILDRImage->Offset
-    );
+    );*/
 
   Status = LzmaUefiDecompressGetInfo (
              (VOID *)(UINTN)(EFILDR_HEADER_ADDRESS + EFILDRImage->Offset),
@@ -230,24 +230,24 @@ PrintHeader ('C');
   if (EFI_ERROR (Status)) {
     SystemHang ("Failed to load/relocate DxeMain!\n");
   }
-  PrintString (
+  /*PrintString (
     "DxeCore PE image is successed loaded at %lx, entry=%p\n",
     DxeCoreImage.ImageBasePage,
     DxeCoreImage.EntryPoint
-    );
+    );*/
 
-PrintHeader ('E');
+//PrintHeader ('E');
 
   //
   // Display the table of memory descriptors.
   //
-  PrintString ("\nEFI Memory Descriptors\n");   
+  /*PrintString ("\nEFI Memory Descriptors\n");   
   for (Index = 0; Index < NumberOfMemoryMapEntries; Index++) {
     PrintString (
       "Type = %x Start = %08lx NumberOfPages = %08lx\n",
       EfiMemoryDescriptor[Index].Type, EfiMemoryDescriptor[Index].PhysicalStart, EfiMemoryDescriptor[Index].NumberOfPages
       );
-  }
+  }*/
 
   //
   // Jump to EFI Firmware
@@ -265,13 +265,13 @@ PrintHeader ('E');
     Handoff.DxeCoreImageSize  = DxeCoreImage.NoPages * EFI_PAGE_SIZE;
     Handoff.DxeCoreEntryPoint = (VOID *)(UINTN)DxeCoreImage.EntryPoint;
 
-    PrintString ("Transfer to DxeIpl ...EntryPoint = %p\n", DxeIplImage.EntryPoint);
+    //PrintString ("Transfer to DxeIpl ...EntryPoint = %p\n", DxeIplImage.EntryPoint);
     
     EfiMainEntrypoint = (EFI_MAIN_ENTRYPOINT) DxeIplImage.EntryPoint;
     EfiMainEntrypoint (&Handoff);
   }
 
-PrintHeader ('F');
+//PrintHeader ('F');
 
   //
   // There was a problem loading the image, so HALT the system.

@@ -238,8 +238,8 @@ EfiLdrPeCoffLoadPeImage (
     return Status;
   }
 
-  AsciiSPrint (PrintBuffer, 256, "LoadPe: new image base %lx\n", Image->ImageBasePage);
-  PrintString (PrintBuffer);
+  //AsciiSPrint (PrintBuffer, 256, "LoadPe: new image base %lx\n", Image->ImageBasePage);
+  //PrintString (PrintBuffer);
   Image->Info.ImageBase = (VOID *)(UINTN)Image->ImageBasePage;
   Image->Info.ImageSize = (Image->NoPages << EFI_PAGE_SHIFT) - 1;
   Image->ImageBase      = (UINT8 *)(UINTN)Image->ImageBasePage;
