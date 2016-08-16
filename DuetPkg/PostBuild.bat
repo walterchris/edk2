@@ -16,7 +16,7 @@
 @REM #
 @REM ##
 
-@set BASETOOLS_DIR=%WORKSPACE_TOOLS_PATH%\Bin\Win32
+@set BASETOOLS_DIR=%EDK_TOOLS_BIN%\
 @set BOOTSECTOR_BIN_DIR=%WORKSPACE%\DuetPkg\BootSector\bin
 @set PROCESSOR=""
 @call %WORKSPACE%\DuetPkg\GetVariables.bat
