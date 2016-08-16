@@ -16,7 +16,7 @@
 @REM #
 @REM ##
 
-@set BASETOOLS_DIR=%WORKSPACE_TOOLS_PATH%\Bin\Win32
+@set BASETOOLS_DIR=%EDK_TOOLS_BIN%\
 @set BOOTSECTOR_BIN_DIR=%WORKSPACE%\DuetPkg\BootSector\bin
 @set PROCESSOR=""
 @call %WORKSPACE%\DuetPkg\GetVariables.bat
@@ -26,7 +26,7 @@
 @if "%TARGET_ARCH%"=="X64" set PROCESSOR=X64
 @if %PROCESSOR%=="" goto WrongArch
 
-@set BUILD_DIR=%WORKSPACE%\Build\DuetPkg%PROCESSOR%\%TARGET%_%TOOL_CHAIN_TAG%
+@set BUILD_DIR=%WORKSPACE%\Build\DuetPkgX64\RELEASE_VS2015x86
 
 
 @echo Compressing DUETEFIMainFv.FV ...
