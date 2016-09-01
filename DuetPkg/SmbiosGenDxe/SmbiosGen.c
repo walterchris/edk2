@@ -99,18 +99,83 @@ InstallMemorySmbios (
   SMBIOS_STRUCTURE_POINTER          SmbiosTable;
 
   //
+  // Generate Memory Array info (TYPE 16)
+  //
+  SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 16, 0);
+  if (SmbiosTable.Raw == NULL) {
+    DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 16 (Memory Array Info) not found!\n"));
+  }
+
+  //
+  // Record Smbios Type 16
+  //
+  LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type16);
+
+  //
+  // Generate Memory Array info (TYPE 17)
+  //
+  SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 17, 0);
+  if (SmbiosTable.Raw == NULL) {
+    DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 17-0  not found!\n"));
+  }
+
+  //
+  // Record Smbios Type 17
+  //
+  LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type17);
+
+  //
+  // Generate Memory Array info (TYPE 17)
+  //
+  SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 17, 1);
+  if (SmbiosTable.Raw == NULL) {
+    DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 17-1  not found!\n"));
+  }
+
+  //
+  // Record Smbios Type 17
+  //
+  LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type17);
+
+  //
   // Generate Memory Array Mapped Address info (TYPE 19)
   //
   SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 19, 0);
   if (SmbiosTable.Raw == NULL) {
     DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 19 (Memory Array Mapped Address Info) not found!\n"));
-    return ;
   }
 
   //
   // Record Smbios Type 19
   //
   LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type19);
+
+  //
+  // Generate Memory Array info (TYPE 20)
+  //
+  SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 20, 0);
+  if (SmbiosTable.Raw == NULL) {
+    DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 20-0  not found!\n"));
+  }
+
+  //
+  // Record Smbios Type 20
+  //
+  LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type20);
+
+  //
+  // Generate Memory Array info (TYPE 20)
+  //
+  SmbiosTable = GetSmbiosTableFromType ((SMBIOS_TABLE_ENTRY_POINT *)Smbios, 20, 1);
+  if (SmbiosTable.Raw == NULL) {
+    DEBUG ((EFI_D_ERROR, "SmbiosTable: Type 20-1  not found!\n"));
+  }
+
+  //
+  // Record Smbios Type 20
+  //
+  LogSmbiosData(gSmbios, (UINT8*)SmbiosTable.Type20);
+
   return ;
 }
 
