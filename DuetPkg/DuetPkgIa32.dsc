@@ -255,6 +255,10 @@
   # Bios Thunk
   DuetPkg/BiosVideoThunkDxe/BiosVideo.inf
 
+  #SD/eMMC
+  MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
+  MdeModulePkg/Bus/Pci/SdMmcPciHcDxe/SdMmcPciHcDxe.inf
+
   #
   # Sample Application
   #

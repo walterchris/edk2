@@ -130,6 +130,10 @@ FILE FREEFORM = 878AC2CC-5343-46F2-B563-51F89DAF56BA {
   SECTION UI = "IntelGopVbt"
 }
 
+#SD/eMMC
+INF  MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
+INF  MdeModulePkg/Bus/Pci/SdMmcPciHcDxe/SdMmcPciHcDxe.inf
+
   # Binary INF file to support toggle among different CPU architectures.
 INF  RuleOverride=BINARY FatBinPkg/EnhancedFatDxe/Fat.inf
 INF  RuleOverride=BINARY FSDrivers/ntfs.inf
