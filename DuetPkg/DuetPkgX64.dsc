@@ -269,10 +269,6 @@
   # GOP Driver
   DuetPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 
-  #SD/eMMC
-  MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
-  MdeModulePkg/Bus/Pci/SdMmcPciHcDxe/SdMmcPciHcDxe.inf
-
   #
   # Sample Application
   #
