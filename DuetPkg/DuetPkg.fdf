@@ -99,7 +99,7 @@ INF  MdeModulePkg/Bus/Ata/AtaBusDxe/AtaBusDxe.inf
   # Usb Support
 #INF  MdeModulePkg/Bus/Pci/UhciDxe/UhciDxe.inf
 INF  MdeModulePkg/Bus/Pci/EhciDxe/EhciDxe.inf
-INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
+#INF  MdeModulePkg/Bus/Pci/XhciDxe/XhciDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbBusDxe/UsbBusDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbKbDxe/UsbKbDxe.inf
 INF  MdeModulePkg/Bus/Usb/UsbMouseDxe/UsbMouseDxe.inf
@@ -121,16 +121,21 @@ INF DuetPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 
 FILE DRIVER = FF0C8745-3270-4439-B74F-3E45F8C77064 {
   SECTION DXE_DEPEX_EXP = {gPlatformGOPPolicyGuid}
-  SECTION PE32 = DuetPkg/IntelBrdwlGopDriver.efi
+  #SECTION PE32 = DuetPkg/IntelSnbGopDriver_1016.efi
+  SECTION PE32 = DuetPkg/IntelIvbGopDriver_1030.efi
   SECTION UI = "IntelGopDriver"
 }
 
 FILE FREEFORM = 878AC2CC-5343-46F2-B563-51F89DAF56BA {
-  SECTION RAW = DuetPkg/Vbt-C720.bin
+  SECTION RAW = DuetPkg/Vbt-C710.bin
   #SECTION RAW = DuetPkg/Vbt-C740.bin
   #SECTION RAW = DuetPkg/Vbt-hswbdw-cbox.bin
   SECTION UI = "IntelGopVbt"
 }
+
+#SD/eMMC
+INF  MdeModulePkg/Bus/Sd/SdDxe/SdDxe.inf
+INF  MdeModulePkg/Bus/Pci/SdMmcPciHcDxe/SdMmcPciHcDxe.inf
 
   # Binary INF file to support toggle among different CPU architectures.
 INF  RuleOverride=BINARY FatBinPkg/EnhancedFatDxe/Fat.inf
