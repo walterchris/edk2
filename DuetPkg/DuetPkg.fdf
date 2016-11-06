@@ -121,14 +121,12 @@ INF DuetPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 
 FILE DRIVER = FF0C8745-3270-4439-B74F-3E45F8C77064 {
   SECTION DXE_DEPEX_EXP = {gPlatformGOPPolicyGuid}
-  SECTION PE32 = DuetPkg/IntelBrdwlGopDriver.efi
+  SECTION PE32 = DuetPkg/IntelGopDriver.efi
   SECTION UI = "IntelGopDriver"
 }
 
 FILE FREEFORM = 878AC2CC-5343-46F2-B563-51F89DAF56BA {
-  SECTION RAW = DuetPkg/Vbt-C720.bin
-  #SECTION RAW = DuetPkg/Vbt-C740.bin
-  #SECTION RAW = DuetPkg/Vbt-hswbdw-cbox.bin
+  SECTION RAW = DuetPkg/vbt.bin
   SECTION UI = "IntelGopVbt"
 }
 
