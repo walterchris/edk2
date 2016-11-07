@@ -1223,7 +1223,7 @@ Returns:
   // have the time out
   //
   // BUGBUG: hard code timeout to 5 second to show logo in graphic mode.
-  Timeout = 1;  
+  Timeout = 3;  
   if (Timeout != 0) {
     PlatformBdsEnterFrontPage (Timeout, FALSE);
   }
