@@ -1166,6 +1166,8 @@ PlatformBdsEnterFrontPage (
     }
 
     if (SimpleTextOut != NULL) {
+      SimpleTextOut->SetMode (SimpleTextOut, 2);
+
       Status = SimpleTextOut->QueryMode (
                                 SimpleTextOut,
                                 SimpleTextOut->Mode->Mode,
@@ -1174,13 +1176,10 @@ PlatformBdsEnterFrontPage (
                                 );
       mBootTextModeColumn = (UINT32)BootTextColumn;
       mBootTextModeRow    = (UINT32)BootTextRow;
-    }
 
-    //
-    // Get user defined text mode for setup.
-    //
-    mSetupTextModeColumn       = PcdGet32 (PcdSetupConOutColumn);
-    mSetupTextModeRow          = PcdGet32 (PcdSetupConOutRow);
+      mSetupTextModeColumn = mBootTextModeColumn;
+      mSetupTextModeRow = mBootTextModeRow;
+    }
 
     mModeInitialized           = TRUE;
   }
