@@ -56,8 +56,7 @@ PlatformBdsShowProgress (
   UINTN                          BlockNum;
   UINTN                          PosX;
   UINTN                          PosY;
-  UINTN                          Index;
-
+ 
   if (Progress > 100) {
     return EFI_INVALID_PARAMETER;
   }
@@ -140,41 +139,6 @@ PlatformBdsShowProgress (
                           SizeOfX,
                           SizeOfY - (PosY - EFI_GLYPH_HEIGHT - 1),
                           SizeOfX * sizeof (EFI_UGA_PIXEL)
-                          );
-    } else {
-      return EFI_UNSUPPORTED;
-    }
-  }
-  //
-  // Show progress by drawing blocks
-  //
-  for (Index = PreviousValue; Index < BlockNum; Index++) {
-    PosX = Index * BlockWidth;
-    if (GraphicsOutput != NULL) {
-      Status = GraphicsOutput->Blt (
-                          GraphicsOutput,
-                          &ProgressColor,
-                          EfiBltVideoFill,
-                          0,
-                          0,
-                          PosX,
-                          PosY,
-                          BlockWidth - 1,
-                          BlockHeight,
-                          (BlockWidth) * sizeof (EFI_GRAPHICS_OUTPUT_BLT_PIXEL)
-                          );
-    } else if (FeaturePcdGet (PcdUgaConsumeSupport)) {
-      Status = UgaDraw->Blt (
-                          UgaDraw,
-                          (EFI_UGA_PIXEL *) &ProgressColor,
-                          EfiUgaVideoFill,
-                          0,
-                          0,
-                          PosX,
-                          PosY,
-                          BlockWidth - 1,
-                          BlockHeight,
-                          (BlockWidth) * sizeof (EFI_UGA_PIXEL)
                           );
     } else {
       return EFI_UNSUPPORTED;
@@ -287,7 +251,6 @@ BdsMemoryTest (
     TmpStr = GetStringById (STRING_TOKEN (STR_ESC_TO_SKIP_MEM_TEST));
 
     if (TmpStr != NULL) {
-      PrintXY (10, 10, NULL, NULL, TmpStr);
       FreePool (TmpStr);
     }
   } else {
@@ -304,7 +267,6 @@ BdsMemoryTest (
     if (ErrorOut && (Status == EFI_DEVICE_ERROR)) {
       TmpStr = GetStringById (STRING_TOKEN (STR_SYSTEM_MEM_ERROR));
       if (TmpStr != NULL) {
-        PrintXY (10, 10, NULL, NULL, TmpStr);
         FreePool (TmpStr);
       }
 
@@ -330,7 +292,6 @@ BdsMemoryTest (
             TmpStr,
             sizeof (StrPercent) / sizeof (CHAR16) - StrLen (StrPercent) - 1
             );
-          PrintXY (10, 10, NULL, NULL, StrPercent);
           FreePool (TmpStr);
         }
 
@@ -370,8 +331,6 @@ BdsMemoryTest (
                 );
               FreePool (TmpStr);
             }
-
-            PrintXY (10, 10, NULL, NULL, L"100");
           }
           Status = GenMemoryTest->Finished (GenMemoryTest);
           goto Done;
@@ -403,7 +362,7 @@ Done:
       FreePool (TmpStr);
     }
 
-    PrintXY (10, 10, NULL, NULL, StrTotalMemory);
+    //PrintXY (10, 10, NULL, NULL, StrTotalMemory);
     PlatformBdsShowProgress (
       Foreground,
       Background,
