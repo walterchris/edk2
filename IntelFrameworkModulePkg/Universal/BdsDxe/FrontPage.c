@@ -1065,7 +1065,7 @@ ShowProgress (
         break;
       }
       TimeoutRemain--;
-      
+
       if (!FeaturePcdGet(PcdBootlogoOnlyEnable)) {
         //
         // Show progress
@@ -1177,7 +1177,6 @@ PlatformBdsEnterFrontPage (
   )
 {
   EFI_STATUS                         Status;
-  EFI_STATUS                         StatusHotkey; 
   EFI_BOOT_LOGO_PROTOCOL             *BootLogo;
   EFI_GRAPHICS_OUTPUT_PROTOCOL       *GraphicsOutput;
   EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL    *SimpleTextOut;
@@ -1222,8 +1221,6 @@ PlatformBdsEnterFrontPage (
     }  
 
     if (GraphicsOutput != NULL) {
-      Status = GopSetModeAndReconnectTextOut(GraphicsOutput, 0);
-
       //
       // Get current video resolution and text mode.
       //
@@ -1252,7 +1249,7 @@ PlatformBdsEnterFrontPage (
 
     mModeInitialized           = TRUE;
   }
-
+  
   AddBGRT();
 
   //
@@ -1295,34 +1292,11 @@ PlatformBdsEnterFrontPage (
       gST->ConIn->ReadKeyStroke(gST->ConIn, &Key);
     }
 
-    //
-    // Ensure screen is clear when switch Console from Graphics mode to Text mode
-    //
-    gST->ConOut->EnableCursor (gST->ConOut, TRUE);
-    gST->ConOut->ClearScreen (gST->ConOut);
-
   } else {
 
-    HotkeyBoot ();
-    if (TimeoutDefault != 0xffff) {
-      Status = ShowProgress (TimeoutDefault);
-      StatusHotkey = HotkeyBoot ();
+    if (TimeoutDefault == 0) {
+      goto Exit;
 
-      if (!FeaturePcdGet(PcdBootlogoOnlyEnable) || !EFI_ERROR(Status) || !EFI_ERROR(StatusHotkey)){
-        //
-        // Ensure screen is clear when switch Console from Graphics mode to Text mode
-        // Skip it in normal boot 
-        //
-        gST->ConOut->EnableCursor (gST->ConOut, TRUE);
-        gST->ConOut->ClearScreen (gST->ConOut);
-      }
-
-      if (EFI_ERROR (Status)) {
-        //
-        // Timeout or user press enter to continue
-        //
-        goto Exit;
-      }
     }
   }
 
