@@ -1191,18 +1191,30 @@ PlatformBdsEnterFrontPage (
 
     if (GraphicsOutput != NULL) {
       //
-      // Get current video resolution and text mode.
+      // Set output resolution and text mode.
       //
-      mBootHorizontalResolution = GraphicsOutput->Mode->Info->HorizontalResolution;
-      mBootVerticalResolution   = GraphicsOutput->Mode->Info->VerticalResolution;
-      
-      mSetupHorizontalResolution = GraphicsOutput->Mode->Info->HorizontalResolution;
-      mSetupVerticalResolution   = GraphicsOutput->Mode->Info->VerticalResolution;
+      switch (GraphicsOutput->Mode->Info->VerticalResolution) {
+        //Chell
+        case 1800:
+        //Link, Samus
+        case 1700:
+        //Caroline
+        case 1600:
+          mSetupHorizontalResolution = mBootHorizontalResolution = 1024;
+          mSetupVerticalResolution = mBootHorizontalResolution = 768;
+          BdsSetConsoleMode (TRUE);
+          break;
+        default:
+          mSetupHorizontalResolution = mBootHorizontalResolution =
+                GraphicsOutput->Mode->Info->HorizontalResolution;
+          mSetupVerticalResolution = mBootHorizontalResolution =
+                GraphicsOutput->Mode->Info->VerticalResolution;
+          SimpleTextOut->SetMode (SimpleTextOut, 2);
+          break;
+      }
     }
 
     if (SimpleTextOut != NULL) {
-      SimpleTextOut->SetMode (SimpleTextOut, 2);
-
       Status = SimpleTextOut->QueryMode (
                                 SimpleTextOut,
                                 SimpleTextOut->Mode->Mode,
