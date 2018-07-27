@@ -338,34 +338,18 @@ BdsMemoryTest (
 
 Done:
   if (!FeaturePcdGet(PcdBootlogoOnlyEnable)) {
-    UnicodeValueToStringS (StrTotalMemory, StrTotalMemorySize, COMMA_TYPE, TotalMemorySize, 0);
-    if (StrTotalMemory[0] == L',') {
-      StrTotalMemory++;
-      StrTotalMemorySize -= sizeof (CHAR16);
-    }
-
-    TmpStr = GetStringById (STRING_TOKEN (STR_MEM_TEST_COMPLETED));
-    if (TmpStr != NULL) {
-      StrnCatS (
-        StrTotalMemory,
-        StrTotalMemorySize / sizeof (CHAR16),
-        TmpStr,
-        StrTotalMemorySize / sizeof (CHAR16) - StrLen (StrTotalMemory) - 1
-        );
-      FreePool (TmpStr);
-    }
-
+    //Override memory test string
     PlatformBdsShowProgress (
       Foreground,
       Background,
-      StrTotalMemory,
+      L"VS Networks CB3-02",
       Color,
       100,
       (UINTN) PreviousValue
       );
 
   } else {
-    DEBUG ((EFI_D_INFO, "%d bytes of system memory tested OK\r\n", TotalMemorySize));
+    DEBUG ((EFI_D_INFO, "VS Networks CB3-01\r\n"));
   }
 
   FreePool (Pos);
