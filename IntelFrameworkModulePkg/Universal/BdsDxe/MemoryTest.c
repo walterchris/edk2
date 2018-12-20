@@ -342,14 +342,14 @@ Done:
     PlatformBdsShowProgress (
       Foreground,
       Background,
-      L"VS Networks CB3-03",
+      L"VS Networks CB3-04",
       Color,
       100,
       (UINTN) PreviousValue
       );
 
   } else {
-    DEBUG ((EFI_D_INFO, "VS Networks CB3-03\r\n"));
+    DEBUG ((EFI_D_INFO, "VS Networks CB3-04\r\n"));
   }
 
   FreePool (Pos);
