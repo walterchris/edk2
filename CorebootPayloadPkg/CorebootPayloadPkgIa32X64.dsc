@@ -172,6 +172,7 @@
   SecurityManagementLib|MdeModulePkg/Library/DxeSecurityManagementLib/DxeSecurityManagementLib.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
   CustomizedDisplayLib|MdeModulePkg/Library/CustomizedDisplayLib/CustomizedDisplayLib.inf
+  PlatformBootManagerLib|CorebootPayloadPkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
 
   #
   # CPU
@@ -186,7 +187,8 @@
   ResetSystemLib|CorebootPayloadPkg/Library/ResetSystemLib/ResetSystemLib.inf
   SerialPortLib|CorebootModulePkg/Library/BaseSerialPortLib16550/BaseSerialPortLib16550.inf
   PlatformHookLib|CorebootPayloadPkg/Library/PlatformHookLib/PlatformHookLib.inf
-  PlatformBdsLib|CorebootModulePkg/Library/CorebootBdsLib/PlatformBds.inf
+#  PlatformBdsLib|CorebootModulePkg/Library/CorebootBdsLib/PlatformBds.inf
+  PlatformBootManagerLib|CorebootPayloadPkg/Library/PlatformBootManagerLib/PlatformBootManagerLib.inf
   IoApicLib|PcAtChipsetPkg/Library/BaseIoApicLib/BaseIoApicLib.inf
   CbPlatformSupportLib|CorebootModulePkg/Library/CbPlatformSupportLibNull/CbPlatformSupportLibNull.inf
 
@@ -266,11 +268,7 @@
 #
 ################################################################################
 [PcdsFeatureFlag]
-!if $(TARGET) == DEBUG
   gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseSerial|TRUE
-!else
-  gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseSerial|FALSE
-!endif
   gEfiMdeModulePkgTokenSpaceGuid.PcdStatusCodeUseMemory|FALSE
   gEfiMdeModulePkgTokenSpaceGuid.PcdDxeIplSwitchToLongMode|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutGopSupport|TRUE
@@ -403,10 +401,13 @@
   MdeModulePkg/Universal/SecurityStubDxe/SecurityStubDxe.inf
   UefiCpuPkg/CpuDxe/CpuDxe.inf
 
-  IntelFrameworkModulePkg/Universal/BdsDxe/BdsDxe.inf {
+  MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+  MdeModulePkg/Application/UiApp/UiApp.inf {
     <LibraryClasses>
-      PcdLib|MdePkg/Library/DxePcdLib/DxePcdLib.inf
-  }
+    NULL|MdeModulePkg/Library/DeviceManagerUiLib/DeviceManagerUiLib.inf
+    NULL|MdeModulePkg/Library/BootManagerUiLib/BootManagerUiLib.inf
+    NULL|MdeModulePkg/Library/BootMaintenanceManagerUiLib/BootMaintenanceManagerUiLib.inf
+ }
 
 !if $(USE_HPET_TIMER) == TRUE
   PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
