@@ -166,6 +166,7 @@ INF FatPkg/EnhancedFatDxe/Fat.inf
 !else
 INF  RuleOverride=BINARY USE = X64 FSDrivers/ntfs.inf
 INF  RuleOverride=BINARY USE = X64 FSDrivers/ext4.inf
+INF  RuleOverride=BINARY USE = X64 FSDrivers/btrfs.inf
 !endif
 
 #
