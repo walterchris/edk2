@@ -210,9 +210,9 @@ INF  RuleOverride = BINARY USE = X64 ShellBinPkg/UefiShell/UefiShell.inf
 !endif
 !endif
 
-FILE FREEFORM    = PCD(gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdLogoFile) {
-  SECTION RAW = CorebootPayloadPkg/Logo/Logo.bmp
-}
+#FILE FREEFORM    = PCD(gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdLogoFile) {
+#  SECTION RAW = CorebootPayloadPkg/Logo/Logo.bmp
+#}
 
 #
 # Framebuffer Gop
