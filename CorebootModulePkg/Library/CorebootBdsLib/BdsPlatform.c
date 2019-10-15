@@ -1270,21 +1270,13 @@ Returns:
   // BDS should still give user a chance to enter Setup
   // Check whether the user input after the duration time has expired 
   //
+  
   gBS->WaitForEvent (1, &UserInputDurationTime, &Index);
   gBS->CloseEvent (UserInputDurationTime);
   Status = gST->ConIn->ReadKeyStroke (gST->ConIn, &Key);
-  
-  if (!EFI_ERROR (Status)) {
-    //
-    // Enter Setup if user input 
-    //
-    Timeout = 0xffff;
-    //put eMMC into ACPI mode
-    IoWrite8(0xb2, 0xcd);
-  } else {
-    Timeout = 0;
-  }
-  
+ 
+  Timeout = 0;
+ 
   BdsLibEnumerateAllBootOption (BootOptionList);
   PlatformBdsEnterFrontPage (Timeout, FALSE);
   //not run/reached if Timeout = 0xffff
