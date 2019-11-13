@@ -612,6 +612,12 @@ UsbHubInit (
       break;
     }
   }
+  // Skip ASpeed2400 USB Init - No KVM-USB available in Tianocore
+  DEBUG ((EFI_D_ERROR, "IdVendor:%x\tIdProduct:%x\n", HubIf->Device->DevDesc->Desc.IdVendor, HubIf->Device->DevDesc->Desc.IdProduct));
+  if (HubIf->Device->DevDesc->Desc.IdVendor == 0x557 && HubIf->Device->DevDesc->Desc.IdProduct == 0x7000) {
+	  DEBUG ((EFI_D_ERROR, "Signature found.\n"));
+	  return EFI_DEVICE_ERROR;
+  }
 
   if (Index == NumEndpoints) {
     DEBUG (( EFI_D_ERROR, "UsbHubInit: no interrupt endpoint found for hub %d\n", HubDev->Address));
@@ -660,7 +666,6 @@ UsbHubInit (
     for (Index = 0; Index < HubDesc->NumPorts; Index++) {
       UsbHubCtrlSetPortFeature (HubIf->Device, Index, (EFI_USB_PORT_FEATURE) USB_HUB_PORT_POWER);
     }
-
     //
     // Update for the usb hub has no power on delay requirement
     //
@@ -669,7 +674,6 @@ UsbHubInit (
     }
     UsbHubAckHubStatus (HubIf->Device);
   }
-
   //
   // Create an event to enumerate the hub's port. On
   //
